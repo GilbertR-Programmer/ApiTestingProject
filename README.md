@@ -2,24 +2,25 @@
 ### Overview
 This project aims to test the functionality of the [Petstore3 API](https://petstore3.swagger.io/), using Cucumber and RestAssured to perform comprehensive coverage of the available endpoints of the API.
 
-### Project Management
+## Project Management
 
     TBD (images of project board/acceptance criteria)
 
-### About This Project
+## About This Project
 
     TBD
 
-### Project Setup
+## Project Setup
 
 1. <b>Clone this repository onto your local system</b>
 
 2. <b>Set up config.properties</b>
     
-    This project comes without a config.properties to avoid sharing sensitive data. This must be set up manually by following the follwoing steps:
+    This project comes without a config.properties to avoid sharing sensitive data. This must be set up manually by performing the following steps:
 
     1. Create a resources folder within the test directory
-    2. Populate with the following
+    2. Create a config.properties file within the resources folder
+    3. Populate with the following
 
         ```properties
         base_uri=<DockerContainerLocation>
@@ -31,7 +32,7 @@ This project aims to test the functionality of the [Petstore3 API](https://petst
 
         \<YourJWT> replace this with your JSON Web Token for authorized access
 
-    3. Any additional steps
+    4. Any additional steps
 
 
 3. <b>Docker setup</b>
@@ -62,15 +63,15 @@ This project aims to test the functionality of the [Petstore3 API](https://petst
     2.  `docker stop {container-id-or-name}` the container id can be found from the previous step, you do not have to enter the full ID, the first 3-4 numbers should be sufficient.
 
 
-### Tests Performed
+## Tests Performed
 
     TBD
 
-### Testing Metrics
+## Testing Metrics
 
     TBD
 
-### Further assistance
+## Further Assistance
 
 For any further assistance please contact one of the members of the development team. 
 
