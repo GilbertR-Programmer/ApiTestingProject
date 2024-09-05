@@ -17,4 +17,18 @@ public class RequestUtils {
                 ))
                 .build();
     }
+
+    public static RequestSpecification buildGetPetByIdRequest(String uri, String path, Integer petId){
+        return new RequestSpecBuilder()
+                .setBaseUri(uri)
+                .setBasePath(path)
+                .addHeaders(Map.of(
+                        "Accept", "application/json",
+                        "Content-Type", "application/json"
+                ))
+                .addPathParams(Map.of(
+                        "petId", petId
+                ))
+                .build();
+    }
 }
