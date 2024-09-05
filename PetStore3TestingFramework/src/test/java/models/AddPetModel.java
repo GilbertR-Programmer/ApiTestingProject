@@ -1,24 +1,17 @@
 package models;
 
+import io.restassured.response.Response;
+import io.restassured.specification.RequestSpecification;
 import pojos.AddPet;
 
 public class AddPetModel extends ApiModel{
 
+
     @Override
     public void sendRequest() {
-        
+        response = request.post().thenReturn();
     }
 
-    @Override
-    public String getServer() {
-        return "";
-    }
-
-    @Override
-    public int getResponseStatusCode() {
-        return 0;
-    }
-
-    public void enterPet(AddPet addPet) {
+    public void enterPet(AddPet petToAdd) {
     }
 }
