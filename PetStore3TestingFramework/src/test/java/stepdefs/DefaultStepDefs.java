@@ -1,19 +1,28 @@
 package stepdefs;
 
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import models.AddPetModel;
 
 public class DefaultStepDefs {
-    @Given("Basic example for step def")
-    public void basicExampleForStepDef() {
+
+
+
+    @Given("I have Valid credentials")
+    public void iHaveValidCredentials() {
     }
 
-    @When("also an example")
-    public void alsoAnExample() {
+    @And("I have entered a valid body")
+    public void iHaveEnteredAValidBody() {
     }
 
-    @Then("example succeeds")
-    public void exampleSucceeds() {
+    @When("I submit the request to the api")
+    public void iSubmitTheRequestToTheApi() {
+    }
+
+    @Then("i get a response with a {int}")
+    public void iGetAResponseWithA(int arg0) {
     }
 }

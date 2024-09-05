@@ -28,4 +28,7 @@ public class AppConfig {
         return properties.getProperty("baseUri");
     }
 
+    public static String getOAuthKey() {
+        return properties.getProperty("oAuthKey");
+    }
 }
