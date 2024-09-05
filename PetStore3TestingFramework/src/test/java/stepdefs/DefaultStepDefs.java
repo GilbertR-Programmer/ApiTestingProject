@@ -4,8 +4,11 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import models.AddPetModel;
 
 public class DefaultStepDefs {
+
+
 
     @Given("I have Valid credentials")
     public void iHaveValidCredentials() {

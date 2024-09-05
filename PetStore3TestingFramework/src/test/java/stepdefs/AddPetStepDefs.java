@@ -6,19 +6,25 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
+import models.AddPetModel;
 import org.junit.runner.Request;
+import pojos.AddPet;
+
+import java.util.List;
 
 public class AddPetStepDefs {
 
-    private RequestSpecification request;
-    private Response response;
+    private AddPetModel addPetModel;
 
     @Given("I have created a post request")
     public void iHaveCreatedAPostRequest() {
+        addPetModel = new AddPetModel();
     }
 
     @And("I have entered Valid information")
     public void iHaveEnteredValidInformation() {
+
+
     }
 
     @When("I send the POST request")
