@@ -1,18 +1,24 @@
 package models;
 
+import pojos.AddPet;
+
 public class AddPetModel extends ApiModel{
-    @Override
-    void sendRequest() {
 
+    @Override
+    public void sendRequest() {
+        
     }
 
     @Override
-    void getServer() {
-
+    public String getServer() {
+        return "";
     }
 
     @Override
-    void getResponseStatusCode() {
+    public int getResponseStatusCode() {
+        return 0;
+    }
 
+    public void enterPet(AddPet addPet) {
     }
 }
