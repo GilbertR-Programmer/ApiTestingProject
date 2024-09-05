@@ -25,7 +25,7 @@ Feature: Add A Pet
 
 
   @Sad
-  Scenario:
+  Scenario: Trying to add an invalid pet
     Given I have created an add pet request
     And I have not entered Valid information
     When I send the POST request
