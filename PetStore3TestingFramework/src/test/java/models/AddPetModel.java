@@ -1,7 +1,6 @@
 package models;
 
-import io.restassured.response.Response;
-import io.restassured.specification.RequestSpecification;
+import io.restassured.RestAssured;
 import pojos.AddPet;
 
 public class AddPetModel extends ApiModel{
@@ -9,14 +8,15 @@ public class AddPetModel extends ApiModel{
     private String PATH = "/pet";
 
     public AddPetModel(){
-        request = RequestUtils.buildBasicRequest();
+        request = RestAssured.given(RequestUtils.buildBasicRequest(BASE_URI,PATH));
     }
 
     @Override
     public void sendRequest() {
-        response = request.post().thenReturn();
+        response = request.when().post().thenReturn();
     }
 
     public void enterPet(AddPet petToAdd) {
+        request.body(petToAdd);
     }
 }
