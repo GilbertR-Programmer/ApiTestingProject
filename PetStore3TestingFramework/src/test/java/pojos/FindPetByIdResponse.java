@@ -2,7 +2,7 @@ package pojos;
 
 import java.util.List;
 
-public record FindPetById(
+public record FindPetByIdResponse(
 	List<String> photoUrls,
 	String name,
 	int id,
