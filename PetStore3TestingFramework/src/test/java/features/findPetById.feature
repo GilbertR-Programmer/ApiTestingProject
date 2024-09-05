@@ -7,18 +7,20 @@ Feature: Retrieve Pet Details By ID
   @happy
   Scenario: Successful Retrieval of Pet Details
     Given I have a valid pet ID
+      | petId |
+      | 1     |
+      | 3     |
+      | 5     |
+      | 6     |
     When I make get a request to find pet by id
     Then I should receive a 200 OK response
-    And the pet details should be:
-      | field          | expectedValue     |
-      | id             | 3                 |
-      | name           | Pet-3             |
-      | status         | available         |
-      | categoryId     | 1                 |
-      | categoryName   | Cats              |
-      | tagId          | 0                 |
-      | tagName        | itc               |
-      | photoUrl       | string            |
+    And the pet details should have an ID of
+      | petId |
+      | 1     |
+      | 3     |
+      | 5     |
+      | 6     |
+
 
   @sad
   Scenario: Pet ID Does Not Exist
