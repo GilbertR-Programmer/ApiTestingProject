@@ -23,8 +23,9 @@ This project aims to test the functionality of the [Petstore3 API](https://petst
     3. Populate with the following
 
         ```properties
-        base_uri=<DockerContainerLocation>
-        token=<YourJWT>
+        baseUri=<DockerContainerLocation>
+        oAuthKey=<YourJWT>
+        testString=<testString>
         add other properties here
         ```
         
