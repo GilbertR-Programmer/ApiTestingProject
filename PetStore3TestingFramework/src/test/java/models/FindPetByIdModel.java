@@ -12,7 +12,7 @@ public class FindPetByIdModel extends ApiModel {
         response = request.get().prettyPeek().thenReturn();
     }
 
-    public FindPetByIdModel() {
-        request = RestAssured.given(RequestUtils.buildBasicRequest(BASE_URI, PET_PATH)).when();
+    public FindPetByIdModel(Integer pet_Id) {
+        request = RestAssured.given(RequestUtils.buildGetPetByIdRequest(BASE_URI, PET_PATH, pet_Id)).when();
     }
 }
