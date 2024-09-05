@@ -70,12 +70,6 @@ public class AddPetStepDefs {
         addPetModel.sendRequest();
     }
 
-    @Then("I should receive a {int} status code")
-    public void iShouldReceiveASuccessfulOperationStatusCode(int expectedStatusCode) {
-        Assertions.assertEquals(expectedStatusCode, addPetModel.getResponseStatusCode());
-
-    }
-
     @And("the store should contain the new pet")
     public void theStoreShouldContainTheNewPet() {
         //TODO : THIS WILL USE THE SAME CODE AS THE GET PET BY ID ENDPOINT SO ADD IT THEN
