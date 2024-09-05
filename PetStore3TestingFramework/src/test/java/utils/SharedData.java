@@ -6,8 +6,8 @@ import io.restassured.specification.RequestSpecification;
 public class SharedData {
     private static final SharedData instance = new SharedData();
 
-    public Response response;
-    public RequestSpecification request;
+    public static Response response;
+    public static RequestSpecification request;
 
     // Private constructor to prevent external instantiation
     private SharedData() {}

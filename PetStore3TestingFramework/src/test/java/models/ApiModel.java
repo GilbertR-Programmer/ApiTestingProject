@@ -4,6 +4,8 @@ import config.AppConfig;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 import utils.SharedData;
+import static utils.SharedData.*;
+
 
 public abstract class ApiModel {
 
@@ -13,14 +15,14 @@ public abstract class ApiModel {
     public abstract void sendRequest();
 
     public String getServer() {
-        return SharedData.getInstance().response.getHeader("Server");
+        return response.getHeader("Server");
     }
 
     public int getResponseStatusCode() {
-        return SharedData.getInstance().response.getStatusCode();
+        return response.getStatusCode();
     }
 
     public void enterInvalidBody(String invalidBodyAsText) {
-        SharedData.getInstance().request.body(invalidBodyAsText);
+        request.body(invalidBodyAsText);
     }
 }
