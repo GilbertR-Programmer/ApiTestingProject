@@ -1,4 +1,4 @@
-Feature: Retrieve Pet Details
+Feature: Retrieve Pet Details By ID
 
   As a user,
   I want to retrieve pet details by pet ID
