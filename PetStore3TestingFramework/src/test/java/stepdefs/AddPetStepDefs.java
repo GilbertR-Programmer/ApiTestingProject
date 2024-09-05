@@ -55,7 +55,7 @@ public class AddPetStepDefs {
 
     @And("I have not entered Valid information")
     public void iHaveNotEnteredValidInformation() {
-        addPetModel.enterPet(null);
+        addPetModel.enterPet("null");
     }
 
     @And("the store should not contain the invalid entry")

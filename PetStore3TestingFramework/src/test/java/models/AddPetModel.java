@@ -8,15 +8,16 @@ public class AddPetModel extends ApiModel{
     private String PATH = "/pet";
 
     public AddPetModel(){
-        request = RestAssured.given(RequestUtils.buildBasicRequest(BASE_URI,PATH));
+        request = RestAssured.given(RequestUtils.buildBasicRequest(BASE_URI,PATH)).when();
     }
 
     @Override
     public void sendRequest() {
-        response = request.when().post().thenReturn();
+        response = request.post().prettyPeek().thenReturn();
     }
 
     public void enterPet(AddPet petToAdd) {
         request.body(petToAdd);
+        request.log().all();
     }
 }

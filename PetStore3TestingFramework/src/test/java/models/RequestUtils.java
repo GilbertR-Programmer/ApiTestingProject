@@ -12,7 +12,8 @@ public class RequestUtils {
                 .setBaseUri(uri)
                 .setBasePath(path)
                 .addHeaders(Map.of(
-                        "Accept", "application/json"
+                        "Accept", "application/json",
+                        "Content-Type", "application/json"
                 ))
                 .build();
     }
