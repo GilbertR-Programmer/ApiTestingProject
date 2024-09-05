@@ -4,6 +4,7 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import io.cucumber.datatable.DataTable;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 import models.AddPetModel;
@@ -13,7 +14,9 @@ import pojos.AddPet;
 import pojos.Category;
 import pojos.TagsItem;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class AddPetStepDefs {
 
@@ -37,12 +40,40 @@ public class AddPetStepDefs {
 
     }
 
+    @And("I have entered the following information")
+    public void iHaveEnteredTheFollowingInformation(DataTable table) {
+        List<List<String>> rows = table.asLists(String.class);
+
+        Map<String, String> dataMap = new HashMap<>();
+
+        try {
+            for (List<String> row : rows) {
+                if (row.size() == 2) {
+                    String field = row.get(0).trim();
+                    String value = row.get(1).trim();
+                    dataMap.put(field, value);
+                }
+            }
+            addPetModel.enterPet(new AddPet(
+                    List.of(dataMap.get("photoUrls")),
+                    dataMap.get("name"),
+                    Integer.parseInt(dataMap.get("id")),
+                    new Category(dataMap.get("categoryName"),Integer.parseInt(dataMap.get("categoryId"))),
+                    List.of(new TagsItem(dataMap.get("tags"),0)),
+                    dataMap.get("status")
+            ));
+        }
+        catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+    }
+
     @When("I send the POST request")
     public void iSendThePOSTRequest() {
         addPetModel.sendRequest();
     }
 
-    @Then("I should receive a {int} status Code")
+    @Then("I should receive a {int} status code")
     public void iShouldReceiveASuccessfulOperationStatusCode(int expectedStatusCode) {
         Assertions.assertEquals(expectedStatusCode, addPetModel.getResponseStatusCode());
 
@@ -55,7 +86,7 @@ public class AddPetStepDefs {
 
     @And("I have not entered Valid information")
     public void iHaveNotEnteredValidInformation() {
-        addPetModel.enterPet(null);
+        addPetModel.enterInvalidBody("invalid");
     }
 
     @And("the store should not contain the invalid entry")
