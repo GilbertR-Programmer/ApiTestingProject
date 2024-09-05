@@ -18,6 +18,5 @@ public class AddPetModel extends ApiModel{
 
     public void enterPet(AddPet petToAdd) {
         request.body(petToAdd);
-        request.log().all();
     }
 }

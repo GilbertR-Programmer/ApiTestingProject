@@ -20,4 +20,8 @@ public abstract class ApiModel {
     public int getResponseStatusCode() {
         return response.getStatusCode();
     }
+
+    public void enterInvalidBody(String invalidBodyAsText) {
+        request.body(invalidBodyAsText);
+    }
 }
