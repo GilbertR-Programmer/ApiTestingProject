@@ -4,26 +4,40 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import io.restassured.RestAssured;
+import io.restassured.response.Response;
+import models.FindPetByIdModel;
+import org.hamcrest.MatcherAssert;
+import org.hamcrest.Matchers;
 
 public class FindPetByIdStepDefs {
+    private Response response;
+    private Integer petId;
+
     @Given("I have a valid pet ID")
     public void iHaveAValidPetID() {
+        petId = 3;
     }
 
     @When("I make a GET request to \\/pet\\/\\{petId}")
     public void iMakeAGETRequestToPetPetId() {
+        FindPetByIdModel findPetByIdModel = new FindPetByIdModel(petId);
+        findPetByIdModel.sendRequest();
     }
 
-    @Then("I should receive a {int} OK response")
-    public void iShouldReceiveAOKResponse(int arg0) {
+    @Then("I should receive a 200 OK response")
+    public void iShouldReceiveAOKResponse() {
+        MatcherAssert.assertThat(response.getStatusCode(), Matchers.is(200));
     }
 
     @And("the pet details should be correct")
     public void thePetDetailsShouldBeCorrect() {
+        MatcherAssert.assertThat(response.jsonPath().getString("id"), Matchers.is(petId));
     }
 
     @Given("I have an invalid pet ID that does not exist")
     public void iHaveAnInvalidPetIDThatDoesNotExist() {
+        petId = 999999;
     }
 
     @Then("I should receive a {int} Not Found response")
@@ -36,6 +50,7 @@ public class FindPetByIdStepDefs {
 
     @Given("I have a pet ID in an invalid format")
     public void iHaveAPetIDInAnInvalidFormat() {
+//        petId="adbc";
     }
 
     @Then("I should receive a {int} Bad Request response")
