@@ -23,7 +23,7 @@ public class FindPetByIdStepDefs {
     }
 
     @Then("I should receive a {int} Not Found error")
-    public void iShouldReceiveANotFoundError(int arg0) {
+    public void iShouldReceiveANotFoundError(int errorCode) {
     }
 
     @And("the response message should indicate that the pet was not found")
@@ -35,7 +35,7 @@ public class FindPetByIdStepDefs {
     }
 
     @Then("I should receive a {int} Bad Request error")
-    public void iShouldReceiveABadRequestError(int arg0) {
+    public void iShouldReceiveABadRequestError(int errorCode) {
     }
 
     @And("the response message should indicate that the pet ID format is invalid")
