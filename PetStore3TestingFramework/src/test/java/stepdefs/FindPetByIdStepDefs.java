@@ -4,10 +4,15 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import models.FindPetByIdModel;
 
 public class FindPetByIdStepDefs {
+
+    private FindPetByIdModel findPetByIdModel;
+
     @Given("I have a valid pet ID")
     public void iHaveAValidPetID() {
+        findPetByIdModel = new FindPetByIdModel();
     }
 
     @When("I make a GET request to \\/pet\\/\\{petId}")
