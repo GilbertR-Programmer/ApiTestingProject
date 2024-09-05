@@ -2,14 +2,22 @@ package models;
 
 import config.AppConfig;
 import io.restassured.response.Response;
+import io.restassured.specification.RequestSpecification;
 
 public abstract class ApiModel {
 
-    private Response response;
-    private static final String BASE_URI = AppConfig.getBaseUri();
-    private static final String OAUTH_KEY = AppConfig.getOAuthKey();
+    protected RequestSpecification request;
+    protected Response response;
+    protected static final String BASE_URI = AppConfig.getBaseUri();
+    protected static final String OAUTH_KEY = AppConfig.getOAuthKey();
 
-    abstract void sendRequest();
-    abstract void getServer();
-    abstract void getResponseStatusCode();
+    public abstract void sendRequest();
+
+    public String getServer() {
+        return response.getHeader("Server");
+    }
+
+    public int getResponseStatusCode() {
+        return response.getStatusCode();
+    }
 }
