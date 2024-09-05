@@ -6,6 +6,11 @@ import pojos.AddPet;
 
 public class AddPetModel extends ApiModel{
 
+    private String PATH = "/pet";
+
+    public AddPetModel(){
+        request = RequestUtils.buildBasicRequest();
+    }
 
     @Override
     public void sendRequest() {

@@ -8,8 +8,8 @@ public abstract class ApiModel {
 
     protected RequestSpecification request;
     protected Response response;
-    private static final String BASE_URI = AppConfig.getBaseUri();
-    private static final String OAUTH_KEY = AppConfig.getOAuthKey();
+    protected static final String BASE_URI = AppConfig.getBaseUri();
+    protected static final String OAUTH_KEY = AppConfig.getOAuthKey();
 
     public abstract void sendRequest();
 
