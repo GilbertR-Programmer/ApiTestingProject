@@ -22,32 +22,11 @@ jobs:
           distribution: 'temurin'
           java-version: '21'
 
-      - name: Cache Maven dependencies
-        uses: actions/cache@v3
-        with:
-          path: ~/.m2/repository
-          key: ${{ runner.os }}-maven-${{ hashFiles('PetStore3TestingFramework/pom.xml') }}
-          restore-keys: |
-            ${{ runner.os }}-maven
-
-      - name: Build with Maven
-        working-directory: PetStore3TestingFramework
-        run: mvn clean install
-
-      - name: Run Cucumber tests
-        working-directory: PetStore3TestingFramework
-        run: mvn test
-
-      - name: Archive Cucumber HTML report
-        if: always()
-        uses: actions/upload-artifact@v3
-        with:
-          name: cucumber-html-report
-          path: PetStore3TestingFramework/target/testReport.html
-
-      - name: Archive Cucumber JSON report
-        if: always()
-        uses: actions/upload-artifact@v3
-        with:
-          name: cucumber-json-report
-          path: PetStore3TestingFramework/target/jsonReport.html
+      - name: Run Tests in Docker
+        run: |
+          docker run --rm \
+          -p 8080:8080 \
+          -e TEST_STRING="${{ secrets.TEST_STRING }}" \
+          -e BASE_URI="${{ secrets.BASE_URI }}" \
+          -e OAUTH_KEY="${{ secrets.OAUTH_KEY }}" \
+          craynersg/petstore-api-test-project:v1.0 mvn test
