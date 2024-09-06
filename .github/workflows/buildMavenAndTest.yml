@@ -24,8 +24,8 @@ jobs:
 
       - name: Create config.properties file
         run: |
-          echo "baseUri=${{ secrets.BASE_URI }}" >> PetStore3TestingFramework/src/test/resources/config.properties
-          echo "oAuthKey=${{ secrets.OAUTH_KEY }}" >> PetStore3TestingFramework/src/test/resources/config.properties
+          echo "BASEURI=${{ secrets.BASE_URI }}" >> PetStore3TestingFramework/src/test/resources/config.properties
+          echo "OAUTHKEY=${{ secrets.OAUTH_KEY }}" >> PetStore3TestingFramework/src/test/resources/config.properties
 
       - name: Build with Maven
         working-directory: PetStore3TestingFramework
