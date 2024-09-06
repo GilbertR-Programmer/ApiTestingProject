@@ -36,9 +36,21 @@ jobs:
           docker run -d -p 8080:8080 craynersg/petstore-api-test-project:v1.0
           sleep 10  # Wait for the API to be fully up and running
 
-      - name: Run Tests
+      - name: Run Tests with Debug Info
         working-directory: PetStore3TestingFramework
-        run: mvn test
+        run: mvn test -X
+
+      - name: Upload Cucumber JSON Report
+        uses: actions/upload-artifact@v3
+        with:
+          name: cucumber-json-report
+          path: PetStore3TestingFramework/target/jsonReport.json
+
+      - name: Upload Cucumber HTML Report
+        uses: actions/upload-artifact@v3
+        with:
+          name: cucumber-html-report
+          path: PetStore3TestingFramework/target/testReport.html
 
       - name: Clean up
         run: rm PetStore3TestingFramework/config.properties
