@@ -18,7 +18,7 @@ public class FindPetByIdModel extends ApiModel {
         response = request.get().prettyPeek().thenReturn();
     }
 
-    public FindPetByIdModel(Integer pet_Id) {
+    public FindPetByIdModel(String pet_Id) {
         request = RestAssured.given(RequestUtils.buildRequestWithPathParams(BASE_URI, PET_PATH, Map.of(
                 "petId", pet_Id
         ))).when();

@@ -3,6 +3,7 @@ package utils;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.specification.RequestSpecification;
 
+import java.io.Serializable;
 import java.util.Map;
 
 public class RequestUtils {
@@ -22,12 +23,12 @@ public class RequestUtils {
                 ));
     }
 
-    public static RequestSpecification buildRequestWithPathParams(String uri, String path,Map<String, Integer> pathParams){
+    public static RequestSpecification buildRequestWithPathParams(String uri, String path,Map<String, ? extends Serializable> pathParams){
         return getRequestWithPathParams(uri,path,pathParams)
                 .build();
     }
 
-    public static RequestSpecBuilder getRequestWithPathParams(String uri, String path, Map<String, Integer> pathParams){
+    public static RequestSpecBuilder getRequestWithPathParams(String uri, String path, Map<String, ? extends Serializable> pathParams){
         return getBasicRequest(uri, path)
                 .addPathParams(pathParams);
     }
