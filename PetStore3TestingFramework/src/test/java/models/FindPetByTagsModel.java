@@ -28,7 +28,4 @@ public class FindPetByTagsModel extends ApiModel{
         return response.as(Pet[].class);
     }
 
-    public String getResponseMessage() {
-        return response.body().asString();
-    }
 }

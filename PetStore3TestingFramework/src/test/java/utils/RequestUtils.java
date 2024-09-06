@@ -39,8 +39,6 @@ public class RequestUtils {
                 ));
     }
 
-
-
     public static RequestSpecification buildRequestWithPathParams(String uri, String path,Map<String, ? extends Serializable> pathParams){
         return getRequestWithPathParams(uri,path,pathParams)
                 .build();
@@ -49,5 +47,11 @@ public class RequestUtils {
     public static RequestSpecBuilder getRequestWithPathParams(String uri, String path, Map<String, ? extends Serializable> pathParams){
         return getBasicRequest(uri, path)
                 .addPathParams(pathParams);
+    }
+
+    public static RequestSpecification buildRequestWithPathParamsAndApiKey(String uri, String path, Map<String, Integer> pathParams, String apiKey) {
+        return getRequestWithPathParams(uri, path, pathParams)
+                .addHeader("api_key", apiKey)
+                .build();
     }
 }

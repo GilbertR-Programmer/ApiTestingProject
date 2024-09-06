@@ -27,7 +27,8 @@ public class FindPetByIdStepDefs {
 
     @And("an error message indicating that the pet was not found")
     public void anErrorMessageIndicatingThatThePetWasNotFound() {
-        Assertions.fail();
+        String responseBody = model.getResponseMessage();
+        Assertions.assertEquals("Pet not found", responseBody);
     }
 
     @And("an error message indicating that the pet ID format is invalid")
@@ -48,7 +49,7 @@ public class FindPetByIdStepDefs {
 
     @When("I make get a request to find pet by id")
     public void iMakeGetARequestToFindPetById() {
-        model = new FindPetByIdModel(Integer.valueOf(petId));
+        model = new FindPetByIdModel(petId);
         model.sendGetRequest();
     }
 

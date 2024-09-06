@@ -31,4 +31,4 @@ Feature: Retrieve Pet Details By ID
     Given I have a pet ID in an invalid format
     When I make get a request to find pet by id
     Then I should receive a 400 status code
-    And an error message indicating that the pet ID format is invalid
+

@@ -43,4 +43,8 @@ public class ApiModel {
     public void enterInvalidBody(String invalidBodyAsText) {
         request.body(invalidBodyAsText);
     }
+
+    public String getResponseMessage() {
+        return response.body().asString();
+    }
 }
