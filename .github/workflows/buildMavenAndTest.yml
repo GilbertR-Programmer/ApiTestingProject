@@ -22,11 +22,22 @@ jobs:
           distribution: 'temurin'
           java-version: '21'
 
-      - name: Run Tests in Docker
+      - name: Build with Maven
+        run: mvn clean install
+
+      - name: Create config.properties file
         run: |
-          docker run --rm \
-          -p 8080:8080 \
-          -e TEST_STRING="${{ secrets.TEST_STRING }}" \
-          -e BASE_URI="${{ secrets.BASE_URI }}" \
-          -e OAUTH_KEY="${{ secrets.OAUTH_KEY }}" \
-          craynersg/petstore-api-test-project:v1.0 mvn test
+          echo "testString=${{ secrets.TEST_STRING }}" > config.properties
+          echo "baseUri=${{ secrets.BASE_URI }}" >> config.properties
+          echo "oAuthKey=${{ secrets.OAUTH_KEY }}" >> config.properties
+
+      - name: Run PetStore3 API in Docker
+        run: |
+          docker run -d -p 8080:8080 craynersg/petstore-api-test-project:v1.0
+          sleep 10  # Wait for the API to be fully up and running
+
+      - name: Run Tests
+        run: mvn test
+
+      - name: Clean up
+        run: rm config.properties
