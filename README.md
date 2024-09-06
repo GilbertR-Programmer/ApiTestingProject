@@ -4,34 +4,31 @@ This project aims to test the functionality of the [Petstore3 API](https://petst
 
 ### Project Management
 
-    TBD (images of project board/acceptance criteria)
-
-### About This Project
-
-    TBD
+We used a kanban board for managing this project 
+![img.png](kanban.png)
+With Acceptance criteria being added to the user stories we created on the board
+![img.png](acceptanceCriteria.png)
 
 ### Project Setup
 
 1. <b>Clone this repository onto your local system</b>
 
-2. <b>Set up config.properties</b>
+   2. <b>Set up config.properties</b>
     
-    This project comes without a config.properties to avoid sharing sensitive data. This must be set up manually by following the follwoing steps:
+       This project comes without a config.properties to avoid sharing sensitive data. This must be set up manually by following the follwoing steps:
 
-    1. Create a resources folder within the test directory
-    2. Populate with the following
+       1. Create a resources folder within the test directory
+       2. Create a config.properties file containing the following
 
-        ```properties
-        base_uri=<DockerContainerLocation>
-        token=<YourJWT>
-        add other properties here
-        ```
+           ```properties
+          baseUri=<DockerContainerLocation>/api/v3
+          oAuthKey=<oAuthKey>
+           ```
         
-        \<DockerContainerLocation> will be covered in the next step
+           \<DockerContainerLocation> will be covered in the next step
 
-        \<YourJWT> replace this with your JSON Web Token for authorized access
+           \<oAuthKey> replace this with your OauthKey for authentication (this is currently not needed)
 
-    3. Any additional steps
 
 
 3. <b>Docker setup</b>
@@ -61,17 +58,52 @@ This project aims to test the functionality of the [Petstore3 API](https://petst
     1.  `docker ps` to find all active containers and the ID of the petstore API container
     2.  `docker stop {container-id-or-name}` the container id can be found from the previous step, you do not have to enter the full ID, the first 3-4 numbers should be sufficient.
 
+    
 
-### Tests Performed
+### Using the Framework 
+This Framework uses a Object model structure to abstract the actual Api calls away from where the tests are being written for reusability.
+The Actual Test Cases are written in Cucumber with gherkin syntax here is an example
 
-    TBD
+    
+```gherkin
+@Happy
+Scenario Outline: Successful Retrieval of Pet Details
+Given I have a valid pet ID of "<petId>"
+When I make get a request to find pet by id
+Then I should receive a 200 status code
+And the pet details should have an ID of "<petId>"
+Examples:
+| petId |
+| 1     |
+| 3     |
+| 5     |
+| 6     |
+   ```
 
-### Testing Metrics
+This script then points to a step definition which is written in java code 
 
-    TBD
+```java
+@When("I make get a request to find pet by id")
+public void iMakeGetARequestToFindPetById() {
+    model = new FindPetByIdModel(petId);
+    model.sendGetRequest();
+}
+```
 
-### Further assistance
+Which in turn points to a model which uses rest assured to execute this call 
 
-For any further assistance please contact one of the members of the development team. 
+```java
+public void sendGetRequest(){
+    response = request.get().prettyPeek().thenReturn();
+}
+```
 
-<sub align="center">Thank you for choosing to test with SG Pet Store 3 Api Automated Testing© . Your number one solution for testing API's for pet stores (9/10 pet store owners agree)</sub>
+When adding tests to this framework be sure your models <b>extend ApiModel</b> and have the import
+```java
+import static utils.SharedData.*;
+```
+
+So that you are able to make use of the shared response and request singleton which allows us to reuse step definitions that check generic things like status code
+There is also a RequestUtils class designed to help build rest assured requests.
+
+
