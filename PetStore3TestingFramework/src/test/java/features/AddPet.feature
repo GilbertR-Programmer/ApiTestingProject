@@ -30,4 +30,3 @@ Feature: Add A Pet
     And I have not entered Valid information
     When I send the POST request
     Then I should receive a 400 status code
-    And the store should not contain the invalid entry

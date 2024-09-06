@@ -21,4 +21,8 @@ public class AddPetModel extends ApiModel{
     public void enterPet(Pet petToAdd) {
         request.body(petToAdd);
     }
+
+    public Pet getAddedPet() {
+        return response.as(Pet.class);
+    }
 }

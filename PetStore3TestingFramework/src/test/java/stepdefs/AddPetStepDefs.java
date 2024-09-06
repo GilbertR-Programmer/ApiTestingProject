@@ -6,6 +6,7 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import io.cucumber.datatable.DataTable;
 import models.AddPetModel;
+import models.FindPetByIdModel;
 import org.junit.jupiter.api.Assertions;
 import pojos.Pet;
 import pojos.Category;
@@ -72,18 +73,16 @@ public class AddPetStepDefs {
 
     @And("the store should contain the new pet")
     public void theStoreShouldContainTheNewPet() {
-        //TODO : THIS WILL USE THE SAME CODE AS THE GET PET BY ID ENDPOINT SO ADD IT THEN
+        Pet petAdded = addPetModel.getAddedPet();
+        FindPetByIdModel findPetByIdModel = new FindPetByIdModel(petAdded.id());
+        findPetByIdModel.sendRequest();
+        Pet petInApi = findPetByIdModel.getPetInResponse();
+        Assertions.assertEquals(petInApi, petAdded);
     }
 
     @And("I have not entered Valid information")
     public void iHaveNotEnteredValidInformation() {
         addPetModel.enterInvalidBody("invalid");
     }
-
-    @And("the store should not contain the invalid entry")
-    public void theStoreShouldNotContainTheInvalidEntry() {
-        //TODO : THIS WILL USE THE SAME CODE AS THE GET PET BY ID ENDPOINT SO ADD IT THEN
-    }
-
 
 }
