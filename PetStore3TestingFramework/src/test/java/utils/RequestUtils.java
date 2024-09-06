@@ -31,4 +31,10 @@ public class RequestUtils {
         return getBasicRequest(uri, path)
                 .addPathParams(pathParams);
     }
+
+    public static RequestSpecification buildRequestWithPathParamsAndApiKey(String uri, String path, Map<String, Integer> pathParams, String apiKey) {
+        return getRequestWithPathParams(uri, path, pathParams)
+                .addHeader("api_key", apiKey)
+                .build();
+    }
 }
