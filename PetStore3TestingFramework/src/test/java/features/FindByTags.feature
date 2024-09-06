@@ -3,13 +3,17 @@ Feature: Find A Pet By Their Tags
   Test a user gets expected results when searching for a pet by tags
 
   @Happy
-  Scenario: Search based on tag and get expected result
+  Scenario Outline: Search based on tag and get expected result
     Given I have created a find by tags request
-    And I have added the tag "tag1" to the parameters
+    And I have added the tag "<tag>" to the parameters
     When I send the GET request
-    Then I should receive an array of pets with the tag "tag1"
+    Then I should receive an array of pets with the tag "<tag>"
     And I should receive a 200 status code
-  #tag1 tag2 tag3
+    Examples:
+      | tag |
+      |tag1|
+      |tag2|
+      |tag3|
 
   @Sad
   Scenario: Search based on tags but give an invalid input
