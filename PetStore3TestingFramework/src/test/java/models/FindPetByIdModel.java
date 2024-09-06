@@ -24,6 +24,6 @@ public class FindPetByIdModel extends ApiModel {
     }
 
     public String getPetIdInResponse() {
-        return response.jsonPath().getString("id");
+        return String.valueOf(response.as(FindPetByIdResponse.class).id());
     }
 }
