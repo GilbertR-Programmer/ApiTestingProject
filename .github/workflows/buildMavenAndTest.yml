@@ -50,4 +50,4 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: cucumber-json-report
-          path
+          path: PetStore3TestingFramework/target/jsonReport.html
