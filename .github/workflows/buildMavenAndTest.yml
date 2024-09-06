@@ -29,7 +29,7 @@ jobs:
 
       - name: Build with Maven
         working-directory: PetStore3TestingFramework
-        run: mvn clean install
+        run: mvn clean package
 
       - name: Run PetStore3 API in Docker
         run: |
