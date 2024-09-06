@@ -2,6 +2,7 @@ package models;
 
 import io.restassured.RestAssured;
 import pojos.FindPetByIdResponse;
+import pojos.Pet;
 import utils.RequestUtils;
 
 import java.util.Map;
@@ -27,7 +28,7 @@ public class FindPetByIdModel extends ApiModel {
         return String.valueOf(response.as(FindPetByIdResponse.class).id());
     }
 
-    public String getPetResponseBody() {
-        return response.body().asString();
+    public Pet getPetInResponse() {
+        return response.as(Pet.class);
     }
 }
