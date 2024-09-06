@@ -27,7 +27,7 @@ public class FindPetByIdStepDefs {
 
     @And("an error message indicating that the pet was not found")
     public void anErrorMessageIndicatingThatThePetWasNotFound() {
-        String responseBody = model.getPetResponseBody();
+        String responseBody = model.getResponseMessage();
         Assertions.assertEquals("Pet not found", responseBody);
     }
 
@@ -50,7 +50,7 @@ public class FindPetByIdStepDefs {
     @When("I make get a request to find pet by id")
     public void iMakeGetARequestToFindPetById() {
         model = new FindPetByIdModel(petId);
-        model.sendRequest();
+        model.sendGetRequest();
     }
 
     @Given("I have an invalid pet ID that does not exist")

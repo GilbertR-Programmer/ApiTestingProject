@@ -1,6 +1,6 @@
 Feature: DeletePet
 
-  @happy
+  @Happy
   Scenario: Delete a pet from the store
     Given I have provided a valid Pet ID of "789"
     And I have provided a valid Api_Key of "api_key"

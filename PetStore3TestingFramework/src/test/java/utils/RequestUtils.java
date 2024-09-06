@@ -2,6 +2,7 @@ package utils;
 
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.specification.RequestSpecification;
+import org.apache.http.entity.ContentType;
 
 import java.io.Serializable;
 import java.util.Map;
@@ -20,6 +21,21 @@ public class RequestUtils {
                 .addHeaders(Map.of(
                         "Accept", "application/json",
                         "Content-Type", "application/json"
+                ));
+    }
+
+    public static RequestSpecification buildOctetRequest(String uri, String path){
+        return getOctetRequest(uri,path)
+                .build();
+    }
+
+    private static RequestSpecBuilder getOctetRequest(String uri, String path){
+        return new RequestSpecBuilder()
+                .setBaseUri(uri)
+                .setBasePath(path)
+                .setContentType("application/octet-stream")
+                .addHeaders(Map.of(
+                        "Accept", "application/json"
                 ));
     }
 

@@ -17,9 +17,4 @@ public class FindPetsByStatusModel extends ApiModel {
     public Response getPetsByStatus(String status) {
         return request.param("status", status).get().prettyPeek().thenReturn();
     }
-
-    @Override
-    public void sendRequest() {
-
-    }
 }
