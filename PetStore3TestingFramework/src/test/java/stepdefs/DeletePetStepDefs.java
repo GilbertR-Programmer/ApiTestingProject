@@ -28,7 +28,7 @@ public class DeletePetStepDefs {
     @When("I send a DELETE request to the Petstore API")
     public void iSendADeleteRequestToThePetstoreApi() {
         model = new DeletePetModel(Integer.valueOf(petId), apiKey);
-        model.sendRequest();
+        model.sendDeleteRequest();
     }
 
     @Then("I should receive a {int} OK status code")
@@ -39,8 +39,8 @@ public class DeletePetStepDefs {
 
     @And("The Pet should be removed from the Store")
     public void thePetShouldBeRemovedFromTheStore() {
-        FindPetByIdModel findModel = new FindPetByIdModel(Integer.valueOf(petId));
-        findModel.sendRequest();
+        FindPetByIdModel findModel = new FindPetByIdModel(petId);
+        findModel.sendGetRequest();
 
         int actualStatusCode = findModel.getResponseStatusCode();
         assertEquals(404, actualStatusCode, "The pet should have been deleted, so the status should be 404.");
@@ -48,8 +48,8 @@ public class DeletePetStepDefs {
 
     @And("The Pet should remain in the store")
     public void thePetShouldRemainInTheStore() {
-        FindPetByIdModel findModel = new FindPetByIdModel(Integer.valueOf(petId));
-        findModel.sendRequest();
+        FindPetByIdModel findModel = new FindPetByIdModel(petId);
+        findModel.sendGetRequest();
 
         int actualStatusCode = findModel.getResponseStatusCode();
         assertEquals(200, actualStatusCode, "The pet should still exist in the store, so the status should be 200.");

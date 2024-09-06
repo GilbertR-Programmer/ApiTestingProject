@@ -71,7 +71,7 @@ public class AddPetStepDefs {
     @And("The store should contain the new pet")
     public void theStoreShouldContainTheNewPet() {
         Pet petAdded = addPetModel.getAddedPet();
-        FindPetByIdModel findPetByIdModel = new FindPetByIdModel(petAdded.id());
+        FindPetByIdModel findPetByIdModel = new FindPetByIdModel(String.valueOf(petAdded.id()));
         findPetByIdModel.sendGetRequest();
         Pet petInApi = findPetByIdModel.getPetInResponse();
         Assertions.assertEquals(petInApi, petAdded);
