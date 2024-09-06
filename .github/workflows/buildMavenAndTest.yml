@@ -32,20 +32,22 @@ jobs:
 
       - name: Build with Maven
         run: mvn clean install
+        working-directory: PetStore3TestingFramework
 
       - name: Run Cucumber tests
         run: mvn test
+        working-directory: PetStore3TestingFramework
 
       - name: Archive Cucumber HTML report
         if: always()
         uses: actions/upload-artifact@v3
         with:
           name: cucumber-html-report
-          path: target/testReport.html
+          path: PetStore3TestingFramework/target/testReport.html
 
       - name: Archive Cucumber JSON report
         if: always()
         uses: actions/upload-artifact@v3
         with:
           name: cucumber-json-report
-          path: target/jsonReport.json
+          path: PetStore3TestingFramework/target/jsonReport.json
