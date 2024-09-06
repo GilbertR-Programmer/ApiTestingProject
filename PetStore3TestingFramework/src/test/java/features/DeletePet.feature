@@ -1,6 +1,6 @@
 Feature: DeletePet
 
-  @happy
+  @Happy
   Scenario: Delete a pet from the store
     Given I send a DELETE request to the Petstore API
     And I have provided a valid Pet ID

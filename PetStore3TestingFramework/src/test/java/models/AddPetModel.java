@@ -13,11 +13,6 @@ public class AddPetModel extends ApiModel{
         request = RestAssured.given(RequestUtils.buildBasicRequest(BASE_URI,PATH)).when();
     }
 
-    @Override
-    public void sendRequest() {
-        response = request.post().prettyPeek().thenReturn();
-    }
-
     public void enterPet(Pet petToAdd) {
         request.body(petToAdd);
     }

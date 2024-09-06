@@ -21,11 +21,6 @@ public class FindByTagsStepDefs {
         findPetByTagsModel = new FindPetByTagsModel();
     }
 
-    @When("I send the GET request")
-    public void iSendTheGETRequest() {
-        findPetByTagsModel.sendRequest();
-    }
-
     @Then("I should receive an array of pets with the tag {string}")
     public void iShouldReceiveAnArrayOfPetsWithTheTag(String expectedTag) {
         boolean tagPresentInEveryPet = Arrays.stream(findPetByTagsModel.getPetsFromResponse())

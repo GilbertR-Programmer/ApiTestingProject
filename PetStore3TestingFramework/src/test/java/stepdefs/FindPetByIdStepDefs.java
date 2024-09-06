@@ -49,7 +49,7 @@ public class FindPetByIdStepDefs {
     @When("I make get a request to find pet by id")
     public void iMakeGetARequestToFindPetById() {
         model = new FindPetByIdModel(Integer.valueOf(petId));
-        model.sendRequest();
+        model.sendGetRequest();
     }
 
     @Given("I have an invalid pet ID that does not exist")

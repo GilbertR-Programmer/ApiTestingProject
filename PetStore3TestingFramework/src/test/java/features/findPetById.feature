@@ -4,7 +4,7 @@ Feature: Retrieve Pet Details By ID
   I want to retrieve pet details by pet ID
   So that I can get information about a specific pet
 
-  @happy
+  @Happy
   Scenario Outline: Successful Retrieval of Pet Details
     Given I have a valid pet ID of "<petId>"
     When I make get a request to find pet by id
@@ -18,7 +18,7 @@ Feature: Retrieve Pet Details By ID
       | 6     |
 
 
-  @sad
+  @Sad
   Scenario: Pet ID Does Not Exist
     Given I have an invalid pet ID that does not exist
     When I make get a request to find pet by id
@@ -26,7 +26,7 @@ Feature: Retrieve Pet Details By ID
     And an error message indicating that the pet was not found
 
 
-  @sad
+  @Sad
   Scenario: Invalid Pet ID Format
     Given I have a pet ID in an invalid format
     When I make get a request to find pet by id

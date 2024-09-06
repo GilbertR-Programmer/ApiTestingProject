@@ -20,11 +20,6 @@ public class FindPetByTagsModel extends ApiModel{
         request.body(tags);
     }
 
-    @Override
-    public void sendRequest() {
-        response = request.get().prettyPeek().thenReturn();
-    }
-
     public void addTagToRequest(String tag) {
         request.queryParam("tags",tag);
     }

@@ -66,16 +66,13 @@ public class AddPetStepDefs {
         }
     }
 
-    @When("I send the POST request")
-    public void iSendThePOSTRequest() {
-        addPetModel.sendRequest();
-    }
 
-    @And("the store should contain the new pet")
+
+    @And("The store should contain the new pet")
     public void theStoreShouldContainTheNewPet() {
         Pet petAdded = addPetModel.getAddedPet();
         FindPetByIdModel findPetByIdModel = new FindPetByIdModel(petAdded.id());
-        findPetByIdModel.sendRequest();
+        findPetByIdModel.sendGetRequest();
         Pet petInApi = findPetByIdModel.getPetInResponse();
         Assertions.assertEquals(petInApi, petAdded);
     }

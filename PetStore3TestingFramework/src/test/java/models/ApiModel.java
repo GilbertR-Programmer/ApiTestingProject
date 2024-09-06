@@ -7,12 +7,30 @@ import utils.SharedData;
 import static utils.SharedData.*;
 
 
-public abstract class ApiModel {
+public class ApiModel {
 
     protected static final String BASE_URI = AppConfig.getBaseUri();
     protected static final String OAUTH_KEY = AppConfig.getOAuthKey();
 
-    public abstract void sendRequest();
+    public void sendPostRequest(){
+        response = request.post().prettyPeek().thenReturn();
+    }
+
+    public void sendGetRequest(){
+        response = request.get().prettyPeek().thenReturn();
+    }
+
+    public void sendPutRequest(){
+        response = request.put().prettyPeek().thenReturn();
+    }
+
+    public void sendDeleteRequest(){
+        response = request.delete().prettyPeek().thenReturn();
+    }
+
+    public void sendPatchRequest(){
+        response = request.patch().prettyPeek().thenReturn();
+    }
 
     public String getServer() {
         return response.getHeader("Server");

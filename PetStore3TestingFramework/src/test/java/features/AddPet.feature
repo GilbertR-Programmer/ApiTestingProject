@@ -16,7 +16,7 @@ Feature: Add A Pet
       | status        | <status>          |
     When I send the POST request
     Then I should receive a 200 status code
-    And the store should contain the new pet
+    And The store should contain the new pet
     Examples:
       | name      | id  | categoryId | categoryName | photoUrls                      | tags                | status    |
       | Buddy     | 123 | 1          | Dog          | https://example.com/photo1.jpg | friendly,playful    | available |
