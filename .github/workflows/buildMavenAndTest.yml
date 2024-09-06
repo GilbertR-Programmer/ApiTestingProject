@@ -22,14 +22,15 @@ jobs:
           distribution: 'temurin'
           java-version: '21'
 
-      - name: Build with Maven
-        run: mvn clean install
-
       - name: Create config.properties file
         run: |
-          echo "testString=${{ secrets.TEST_STRING }}" > config.properties
-          echo "baseUri=${{ secrets.BASE_URI }}" >> config.properties
-          echo "oAuthKey=${{ secrets.OAUTH_KEY }}" >> config.properties
+          echo "testString=${{ secrets.TEST_STRING }}" > PetStore3TestingFramework/config.properties
+          echo "baseUri=${{ secrets.BASE_URI }}" >> PetStore3TestingFramework/config.properties
+          echo "oAuthKey=${{ secrets.OAUTH_KEY }}" >> PetStore3TestingFramework/config.properties
+
+      - name: Build with Maven
+        working-directory: PetStore3TestingFramework
+        run: mvn clean install
 
       - name: Run PetStore3 API in Docker
         run: |
@@ -37,7 +38,8 @@ jobs:
           sleep 10  # Wait for the API to be fully up and running
 
       - name: Run Tests
+        working-directory: PetStore3TestingFramework
         run: mvn test
 
       - name: Clean up
-        run: rm config.properties
+        run: rm PetStore3TestingFramework/config.properties
