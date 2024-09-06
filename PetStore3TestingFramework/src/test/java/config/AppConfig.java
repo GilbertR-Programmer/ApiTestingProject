@@ -20,10 +20,6 @@ public class AppConfig {
         }
     }
 
-    public static String getTestString(){
-        return properties.getProperty("testString");
-    }
-
     public static String getBaseUri(){
         return properties.getProperty("baseUri");
     }
