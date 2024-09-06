@@ -22,17 +22,13 @@ public class RequestUtils {
                 ));
     }
 
-    public static RequestSpecification buildGetPetByIdRequest(String uri, String path, Integer petId){
-        return new RequestSpecBuilder()
-                .setBaseUri(uri)
-                .setBasePath(path)
-                .addHeaders(Map.of(
-                        "Accept", "application/json",
-                        "Content-Type", "application/json"
-                ))
-                .addPathParams(Map.of(
-                        "petId", petId
-                ))
+    public static RequestSpecification buildRequestWithPathParams(String uri, String path,Map<String, Integer> pathParams){
+        return getRequestWithPathParams(uri,path,pathParams)
                 .build();
+    }
+
+    public static RequestSpecBuilder getRequestWithPathParams(String uri, String path, Map<String, Integer> pathParams){
+        return getBasicRequest(uri, path)
+                .addPathParams(pathParams);
     }
 }

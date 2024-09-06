@@ -30,10 +30,10 @@ public class FindPetByTagsModel extends ApiModel{
     }
 
     public Pet[] getPetsFromResponse() {
-        return SharedData.getInstance().response.as(Pet[].class);
+        return response.as(Pet[].class);
     }
 
     public String getResponseMessage() {
-        return SharedData.getInstance().response.body().asString();
+        return response.body().asString();
     }
 }
