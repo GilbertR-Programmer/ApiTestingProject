@@ -24,7 +24,6 @@ jobs:
 
       - name: Create config.properties file
         run: |
-          echo "testString=${{ secrets.TEST_STRING }}" > PetStore3TestingFramework/src/resources/config.properties
           echo "baseUri=${{ secrets.BASE_URI }}" >> PetStore3TestingFramework/src/resources/config.properties
           echo "oAuthKey=${{ secrets.OAUTH_KEY }}" >> PetStore3TestingFramework/src/resources/config.properties
 
