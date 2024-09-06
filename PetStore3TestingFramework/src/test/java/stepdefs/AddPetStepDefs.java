@@ -5,12 +5,9 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import io.cucumber.datatable.DataTable;
-import io.restassured.response.Response;
-import io.restassured.specification.RequestSpecification;
 import models.AddPetModel;
 import org.junit.jupiter.api.Assertions;
-import org.junit.runner.Request;
-import pojos.AddPet;
+import pojos.Pet;
 import pojos.Category;
 import pojos.TagsItem;
 
@@ -22,14 +19,14 @@ public class AddPetStepDefs {
 
     private AddPetModel addPetModel;
 
-    @Given("I have created a post request")
+    @Given("I have created an add pet request")
     public void iHaveCreatedAPostRequest() {
         addPetModel = new AddPetModel();
     }
 
     @And("I have entered Valid information")
     public void iHaveEnteredValidInformation() {
-        addPetModel.enterPet(new AddPet(
+        addPetModel.enterPet(new Pet(
                 List.of("string"),
                 "Roxy",
                 0,
@@ -54,7 +51,7 @@ public class AddPetStepDefs {
                     dataMap.put(field, value);
                 }
             }
-            addPetModel.enterPet(new AddPet(
+            addPetModel.enterPet(new Pet(
                     List.of(dataMap.get("photoUrls")),
                     dataMap.get("name"),
                     Integer.parseInt(dataMap.get("id")),
@@ -73,15 +70,9 @@ public class AddPetStepDefs {
         addPetModel.sendRequest();
     }
 
-    @Then("I should receive a {int} status code")
-    public void iShouldReceiveASuccessfulOperationStatusCode(int expectedStatusCode) {
-        Assertions.assertEquals(expectedStatusCode, addPetModel.getResponseStatusCode());
-
-    }
-
     @And("the store should contain the new pet")
     public void theStoreShouldContainTheNewPet() {
-        //TODO : THIS WILL USE THE SAME CODE AS THE GET ALL PETS ENDPOINT SO ADD IT THEN
+        //TODO : THIS WILL USE THE SAME CODE AS THE GET PET BY ID ENDPOINT SO ADD IT THEN
     }
 
     @And("I have not entered Valid information")
@@ -91,7 +82,7 @@ public class AddPetStepDefs {
 
     @And("the store should not contain the invalid entry")
     public void theStoreShouldNotContainTheInvalidEntry() {
-        //TODO : THIS WILL USE THE SAME CODE AS THE GET ALL PETS ENDPOINT SO ADD IT THEN
+        //TODO : THIS WILL USE THE SAME CODE AS THE GET PET BY ID ENDPOINT SO ADD IT THEN
     }
 
 

@@ -1,7 +1,9 @@
 package models;
 
 import io.restassured.RestAssured;
-import pojos.AddPet;
+import pojos.Pet;
+import utils.RequestUtils;
+import static utils.SharedData.*;
 
 public class AddPetModel extends ApiModel{
 
@@ -16,7 +18,7 @@ public class AddPetModel extends ApiModel{
         response = request.post().prettyPeek().thenReturn();
     }
 
-    public void enterPet(AddPet petToAdd) {
+    public void enterPet(Pet petToAdd) {
         request.body(petToAdd);
     }
 }

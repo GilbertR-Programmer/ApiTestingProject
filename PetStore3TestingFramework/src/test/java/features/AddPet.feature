@@ -1,11 +1,10 @@
-Feature: Add Pet
+Feature: Add A Pet
 
   Test a user can add a pet with the api and results are as expected
 
-
   @Happy
   Scenario Outline: Adding a valid pet using the API
-    Given I have created a post request
+    Given I have created an add pet request
     And I have entered the following information
       | field         | value             |
       | name          | <name>            |
@@ -26,8 +25,8 @@ Feature: Add Pet
 
 
   @Sad
-  Scenario:
-    Given I have created a post request
+  Scenario: Trying to add an invalid pet
+    Given I have created an add pet request
     And I have not entered Valid information
     When I send the POST request
     Then I should receive a 400 status code

@@ -2,10 +2,13 @@ package models;
 
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
+import utils.RequestUtils;
+
+import static utils.SharedData.*;
 
 public class FindPetsByStatusModel extends ApiModel {
 
-    private String PATH = "/pet/findByStatus";
+    private static final String PATH = "/pet/findByStatus";
 
     public FindPetsByStatusModel() {
         request = RestAssured.given(RequestUtils.buildBasicRequest(BASE_URI, PATH)).when();

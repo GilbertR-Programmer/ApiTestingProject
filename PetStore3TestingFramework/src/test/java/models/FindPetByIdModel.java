@@ -1,12 +1,16 @@
 package models;
 
-import config.AppConfig;
 import io.restassured.RestAssured;
 import pojos.FindPetByIdResponse;
+import utils.RequestUtils;
+
+import java.util.Map;
+
+import static utils.SharedData.*;
 
 public class FindPetByIdModel extends ApiModel {
 
-    private final String PET_PATH = "/pet/{petId}";
+    private static final String PET_PATH = "/pet/{petId}";
 
     @Override
     public void sendRequest() {
@@ -14,10 +18,12 @@ public class FindPetByIdModel extends ApiModel {
     }
 
     public FindPetByIdModel(Integer pet_Id) {
-        request = RestAssured.given(RequestUtils.buildGetPetByIdRequest(BASE_URI, PET_PATH, pet_Id)).when();
+        request = RestAssured.given(RequestUtils.buildRequestWithPathParams(BASE_URI, PET_PATH, Map.of(
+                "petId", pet_Id
+        ))).when();
     }
 
-    public FindPetByIdResponse getResponse() {
-        return response.as(FindPetByIdResponse.class);
+    public String getPetIdInResponse() {
+        return response.jsonPath().getString("id");
     }
 }

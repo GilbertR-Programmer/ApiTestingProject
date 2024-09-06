@@ -3,11 +3,12 @@ package models;
 import config.AppConfig;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
+import utils.SharedData;
+import static utils.SharedData.*;
+
 
 public abstract class ApiModel {
 
-    protected RequestSpecification request;
-    protected Response response;
     protected static final String BASE_URI = AppConfig.getBaseUri();
     protected static final String OAUTH_KEY = AppConfig.getOAuthKey();
 
