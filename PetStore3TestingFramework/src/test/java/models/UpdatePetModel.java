@@ -13,11 +13,11 @@ public class UpdatePetModel extends ApiModel {
         request = RestAssured.given(RequestUtils.buildBasicRequest(BASE_URI, PATH)).when();
     }
 
-    public void enterUpdatedPet(Pet updatedPet) {
-        request.body(updatedPet);
+    public void enterPet(Pet petToUpdate) {
+        request.body(petToUpdate);
     }
 
-    public int getCreatedPetId() {
-        return response.jsonPath().getInt("id");
+    public Pet getUpdatedPet() {
+        return response.as(Pet.class);
     }
 }

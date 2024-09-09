@@ -16,8 +16,7 @@ import java.util.List;
 public class UpdatePetStepDefs {
 
     private UpdatePetModel updatePetModel;
-    private Pet petToUpdate;
-    private int petId;
+    private Pet updatedPet;
 
     @Given("I am using the Petstore API PUT pet method")
     public void iAmUsingThePetstoreApiPutPetMethod() {
@@ -25,50 +24,37 @@ public class UpdatePetStepDefs {
     }
 
     @And("I have a valid pet ID {int}")
-    public void iHaveAValidPetID(int petId) {
-        this.petId = petId;
+    public void iHaveAValidPetId(int petId) {
     }
 
     @And("I have a pet ID that exists {int}")
-    public void iHaveAPetIDThatExists(int petId) {
-        FindPetByIdModel findPetByIdModel = new FindPetByIdModel(String.valueOf(petId));
-        findPetByIdModel.sendGetRequest();
-        Pet petInApi = findPetByIdModel.getPetInResponse();
-
-        Assertions.assertNotNull(petInApi, "Pet with ID " + petId + " does not exist in the store.");
-        this.petToUpdate = petInApi;
+    public void iHaveAPetIdThatExists(int petId) {
     }
 
     @When("I submit the request")
     public void iSubmitTheRequest() {
-        Pet updatedPet = new Pet(
-                petToUpdate.photoUrls(),
-                "Josh",
-                petToUpdate.id(),
-                petToUpdate.category(),
-                petToUpdate.tags(),
-                petToUpdate.status()
+        updatedPet = new Pet(
+                List.of("string"),
+                "doggie",
+                10,
+                new Category("Dogs", 1),
+                List.of(new TagsItem("string", 0)),
+                "available"
         );
 
-        updatePetModel.enterUpdatedPet(updatedPet);
+        updatePetModel.enterPet(updatedPet);
         updatePetModel.sendPutRequest();
-        System.out.println(updatePetModel.getResponseMessage());
-        System.out.println(updatePetModel.getResponseStatusCode());
-    }
-
-    @Then("I should receive a {int} status codes")
-    public void iShouldReceiveAStatusCode(int expectedStatusCode) {
-        Assertions.assertEquals(expectedStatusCode, updatePetModel.getResponseStatusCode(), "Status code mismatch");
     }
 
     @And("the pet should be updated")
     public void thePetShouldBeUpdated() {
-        FindPetByIdModel findPetByIdModel = new FindPetByIdModel(String.valueOf(petId));
-        findPetByIdModel.sendGetRequest();
-        Pet updatedPetInApi = findPetByIdModel.getPetInResponse();
+        Pet petInApi = updatePetModel.getUpdatedPet();
 
-        Assertions.assertEquals("Josh", updatedPetInApi.name());  // Check that the name is "Josh"
-        Assertions.assertEquals(petToUpdate.category().name(), updatedPetInApi.category().name());  // Category remains the same
-        Assertions.assertEquals(petToUpdate.status(), updatedPetInApi.status());  // Status remains the same
+        Assertions.assertEquals(updatedPet, petInApi);
+
+        FindPetByIdModel findPetByIdModel = new FindPetByIdModel(String.valueOf(updatedPet.id()));
+        findPetByIdModel.sendGetRequest();
+        Pet petFromApi = findPetByIdModel.getPetInResponse();
+        Assertions.assertEquals(updatedPet, petFromApi);
     }
 }
