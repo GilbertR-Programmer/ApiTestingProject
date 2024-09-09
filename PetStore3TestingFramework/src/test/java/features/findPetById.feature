@@ -13,7 +13,7 @@ Feature: Retrieve Pet Details By ID
     Examples:
       | petId |
       | 1     |
-      | 3     |
+      | 10     |
       | 5     |
       | 6     |
 
