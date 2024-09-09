@@ -11,7 +11,7 @@ Feature: DeletePet
   @sad
   Scenario: Delete a pet from the store with invalid API key
     Given I have provided a valid Pet ID of "3"
-    And I have provided a valid Api_Key of " "
+    And I have provided a valid Api_Key of ""
     When I send a DELETE request to the Petstore API
     Then I should receive a 401 status code
     And The Pet should remain in the store
@@ -23,3 +23,4 @@ Feature: DeletePet
     And I have provided a valid Api_Key of "api_key"
     When I send a DELETE request to the Petstore API
     Then I should receive a 404 status code
+#   This test will fail, deleting a non-existing pet returns 200 status code, see defect report for more information
