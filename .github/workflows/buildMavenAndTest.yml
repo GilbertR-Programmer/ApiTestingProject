@@ -1,0 +1,56 @@
+name: CI - Build and Test
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up JDK 21
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: '21'
+
+      - name: Create config.properties file
+        run: |
+          echo "BASEURI=${{ secrets.BASE_URI }}" >> PetStore3TestingFramework/src/test/resources/config.properties
+          echo "OAUTHKEY=${{ secrets.OAUTH_KEY }}" >> PetStore3TestingFramework/src/test/resources/config.properties
+
+      - name: Build with Maven
+        working-directory: PetStore3TestingFramework
+        run: mvn clean package
+
+      - name: Run PetStore3 API in Docker
+        run: |
+          docker run -d -p 8080:8080 craynersg/petstore-api-test-project:v1.0
+          sleep 10  # Wait for the API to be fully up and running
+
+      - name: Run Tests with Debug Info
+        working-directory: PetStore3TestingFramework
+        run: mvn test -X
+
+      - name: Upload Cucumber JSON Report
+        uses: actions/upload-artifact@v3
+        with:
+          name: cucumber-json-report
+          path: PetStore3TestingFramework/target/jsonReport.json
+
+      - name: Upload Cucumber HTML Report
+        uses: actions/upload-artifact@v3
+        with:
+          name: cucumber-html-report
+          path: PetStore3TestingFramework/target/testReport.html
+
+      - name: Clean up
+        run: rm PetStore3TestingFramework/config.properties
